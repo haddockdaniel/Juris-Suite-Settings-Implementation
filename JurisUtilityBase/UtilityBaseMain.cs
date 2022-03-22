@@ -189,9 +189,9 @@ namespace JurisUtilityBase
                     this._jurisUtility.ExecuteNonQuery(0, "Update SysParam set sptxtvalue='N,Y,Y,N,Y,N,N,N,N,N,N,Y,Y,Y,Y,Y,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y' where spname='CfgConflict'");
                     foreach (DataRow row in (InternalDataCollectionBase)dataTable.Rows)
                     {
-                        string str2 = row["OUI"].ToString();
-                        string str3 = row["SID"].ToString();
-                        string str4 = row["SettingValue"].ToString();
+                        string str2 = row[0].ToString();
+                        string str3 = row[1].ToString();
+                        string str4 = row[2].ToString();
                         this._jurisUtility.ExecuteNonQuery(0, "Delete from organizationalunitsetting where organizationalunitid=" + str2 + " and settingid = " + str3);
                         this._jurisUtility.ExecuteNonQueryCommand(0, "Insert into OrganizationalUnitSetting(organizationalunitid, settingid, value)   Values(" + str2 + "," + str3 + "," + str4 + ")");
                     }
@@ -222,8 +222,8 @@ namespace JurisUtilityBase
                     //this.dgvUser.DataSource = (object)dataTable;
                     foreach (DataRow row in (InternalDataCollectionBase)dataTable.Rows)
                     {
-                        string str2 = row["SID"].ToString();
-                        string str3 = row["SettingValue"].ToString();
+                        string str2 = row[0].ToString();
+                        string str3 = row[1].ToString();
                         this._jurisUtility.ExecuteNonQuery(0, "Delete from organizationalunitsetting where organizationalunitid in (select id from organizationalunit where type=2) and  settingid = " + str2);
                         this._jurisUtility.ExecuteNonQueryCommand(0, "Insert into OrganizationalUnitSetting(organizationalunitid, settingid, value)   select id," + str2 + "," + str3 + " from organizationalunit where type=2 ");
                     }
